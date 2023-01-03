@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Questions of Promise async await</h3>
+    <p>1.Write one example explaining how you can write a callback function.</p>
+    <pre>
+        function Foo(p1){ //parameter
+            p1();
+        }
+        
+        Foo(function cb(){
+            console.log("I am callback function");
+        }); 
+
+        Callback function passed as an argument to another function call.
+    </pre>
+
+    <pre>2."Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Explain callback hell.
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7".
+    </pre>
+    <pre>
+        function asynFirst(cb) {
+            setTimeout(() => {
+                cb();
+            }, 1000)
+        }
+        
+        function asyncSecond(cb) {
+            setTimeout(() => {
+                cb();
+            }, 2000)
+        }
+        
+        function asyncThree(cb) {
+            setTimeout(() => {
+                cb();
+            }, 3000)
+        }
+        
+        function asyncFour(cb) {
+            setTimeout(() => {
+                cb();
+            }, 4000)
+        }
+        
+        function asyncFive(cb) {
+            setTimeout(() => {
+                cb();
+            }, 5000)
+        }
+        
+        function asyncSix(cb) {
+            setTimeout(() => {
+                cb();
+            }, 6000)
+        }
+        
+        function asyncSeven(cb) {
+            setTimeout(() => {
+                cb();
+            }, 7000)
+        }
+        
+        asynFirst(function() {
+            console.log(1)
+            asyncSecond(function() {
+                console.log(2);
+                asyncThree(function() {
+                    console.log(3);
+                    asyncFour(function() {
+                        console.log(4);
+                        asyncFive(function() {
+                            console.log(5);
+                            asyncSix(function() {
+                                console.log(6);
+                                asyncSeven(function() {
+                                    console.log(7);
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+
+        Callback Hell is a pattern with multiple nested callbacks which makes code hard to read and debug when dealing with asynchronous logic. The callback hell looks like a pyramid structur
+    </pre>
+    <pre>3."Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"
+    </pre>
+    <pre>
+        (function printAsyncInOrder(limit) {
+            let [, ...list] = [...Array(limit + 1).keys()];
+            list.reduce(chainedSequence, Promise.resolve());
+            function chainedSequence(chain, currentOrder, index) {
+                return chain.then(() => {
+                    let current = currentOrder;
+                    return new Promise(resolve => setTimeout(() => {
+                    console.log(`${index}`);
+                    resolve();
+                    }, 1000 * index));
+                });
+            }
+        })(7);
+    </pre>
+    <p>4."Create a promise function accepting an argument, if yes is passed to the function then it should go to resolved state and print Promise Resolved, and  if nothing is passed then it should go to reject the state and catch the error and print Promise Rejected "</p>
+    <pre>
+        function testing(value) {
+            const myPromise=new Promise((res,rej)=>{
+        
+                setTimeout(()=>{
+                    if(value === 'yes'){
+                        res("Promise resolved")
+                    }  else{
+                        rej("Promise rejected")
+                    }
+                },1000)
+            });
+        
+            return myPromise;
+        }
+        
+        testing('yes').then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+    </pre>
+    <p>5.Create examples to explain callback function</p>
+    <pre>
+        function Foo(p1){ //parameter
+            p1();
+        }
+        
+        Foo(function cb(){
+            console.log("I am callback function");
+        }); 
+
+        Callback function passed as an argument to another function call.
+    </pre>
+    <p>6.Create examples to explain callback hell function</p>
+    <pre>
+        function asynFirst(cb) {
+            setTimeout(() => {
+                cb();
+            }, 1000)
+        }
+        
+        function asyncSecond(cb) {
+            setTimeout(() => {
+                cb();
+            }, 2000)
+        }
+        
+        function asyncThree(cb) {
+            setTimeout(() => {
+                cb();
+            }, 3000)
+        }
+        
+        function asyncFour(cb) {
+            setTimeout(() => {
+                cb();
+            }, 4000)
+        }
+        
+        function asyncFive(cb) {
+            setTimeout(() => {
+                cb();
+            }, 5000)
+        }
+        
+        function asyncSix(cb) {
+            setTimeout(() => {
+                cb();
+            }, 6000)
+        }
+        
+        function asyncSeven(cb) {
+            setTimeout(() => {
+                cb();
+            }, 7000)
+        }
+        
+        asynFirst(function() {
+            console.log(1)
+            asyncSecond(function() {
+                console.log(2);
+                asyncThree(function() {
+                    console.log(3);
+                    asyncFour(function() {
+                        console.log(4);
+                        asyncFive(function() {
+                            console.log(5);
+                            asyncSix(function() {
+                                console.log(6);
+                                asyncSeven(function() {
+                                    console.log(7);
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+
+        Callback Hell is a pattern with multiple nested callbacks which makes code hard to read and debug when dealing with asynchronous logic. The callback hell looks like a pyramid structur
+    </pre>
+    <p>7.Create examples to explain promises function</p>
+    <pre>
+        function testing(value) {
+            const myPromise=new Promise((res,rej)=>{
+        
+                setTimeout(()=>{
+                    if(value === 'yes'){
+                        res("Promise resolved")
+                    }  else{
+                        rej("Promise rejected")
+                    }
+                },1000)
+            });
+        
+            return myPromise;
+        }
+        
+        testing('yes').then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        })
+
+        resolve and reject are callbacks provided by JavaScript 
+        res — if the job is finished successfully, with result value
+        reject — if an error has occurred, error is the error object.
+
+        A Promise object receive the result or error. Promies object emit result which we can access by using the methods .then and .catch.
+    </pre>
+    <p>8.Create examples to explain async await function</p>
+    <pre>
+        function Myfunction(num) {
+
+            const anything=new Promise(function(resolve,reject){
+        
+                setTimeout(()=>{
+                    if(num%2==0){
+                        resolve("Its even")
+                    }else {
+                        reject("its odd")
+                    }
+                },1000)
+            })
+            return anything;
+        }
+        
+        async function GetDataError(){
+        
+            try{
+                let data= await  Myfunction(97);
+                console.log(data);
+            }catch(err){
+                console.log("Error here",err);
+            }
+        }
+        GetDataError();
+
+        The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains.
+    </pre>
+    <p>9.Create examples to explain promise.all function</p>
+    <pre>
+        const promise1 = Promise.resolve(3);
+        const promise2 = 42;
+        const promise3 = new Promise((resolve, reject) => {
+            setTimeout(resolve, 100, 'foo');
+        });
+        
+        Promise.all([promise1, promise2, promise3]).then((values) => {
+            console.log(values);
+        });
+        The Promise.all() static method takes an iterable of promises as input and returns a single Promise.
+    </pre>
+    <script src="./index.js"></script>
+</body>
+</html>
